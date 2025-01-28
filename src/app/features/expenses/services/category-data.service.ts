@@ -1,9 +1,31 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
+import { BaseHttpService } from '../../../core/services/base-http.service';
+import { Observable } from 'rxjs';
+import { Category } from '../models/category';
+import { Params } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryDataService {
+export class CategoryDataService extends BaseHttpService{
+   constructor(protected override injector:Injector) {
+      super(injector);
+    }
+  
+    getAllCategory():Observable<Category[]>{
+      return super.get("categories/all");
+    }
+  
+    createCategory(requestBody:Category):Observable<Category>{
+      return super.post("categories",requestBody);
+    }
+  
+    updateCategory(requestBody:Category,params:Params):Observable<Category>{
+      return super.put("categories",requestBody,params);
+    }
+  
+    deleteCategory(params:Params):Observable<Category>{
+      return super.delete("categories",params)
+    }
 
-  constructor() { }
 }

@@ -18,7 +18,7 @@ export class ExpenseDataService extends BaseHttpService {
   }
 
   createExpense(requestBody:Expense):Observable<Expense>{
-    return super.post("/expense");
+    return super.post("expense",requestBody);
   }
 
   updateExpense(requestBody:Expense):Observable<Expense>{
